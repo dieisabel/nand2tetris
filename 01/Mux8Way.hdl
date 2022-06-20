@@ -1,0 +1,38 @@
+/**
+ * 8-way multiplexor:
+ * out = a if sel == 000
+ *       b if sel == 001
+ *       c if sel == 010
+ *       d if sel == 011
+ *       e if sel == 100
+ *       f if sel == 101
+ *       g if sel == 110
+ *       h if sel == 111
+ */
+
+CHIP Mux8Way {
+	IN a, b, c, d, e, f, g, h, sel[3];
+	OUT out;
+
+	PARTS:
+		Not (in=sel[0], out=notSel0);
+		Not (in=sel[1], out=notSel1);
+		Not (in=sel[2], out=notSel2);
+
+		And4Way (a=a, b=notSel0, c=notSel1, d=notSel2, out=m0);
+		And4Way (a=b, b=sel[0], c=notSel1, d=notSel2, out=m1);
+		And4Way (a=c, b=notSel0, c=sel[1], d=notSel2, out=m2);
+		And4Way (a=d, b=sel[0], c=sel[1], d=notSel2, out=m3);
+		And4Way (a=e, b=notSel0, c=notSel1, d=sel[2], out=m4);
+		And4Way (a=f, b=sel[0], c=notSel1, d=sel[2], out=m5);
+		And4Way (a=g, b=notSel0, c=sel[1], d=sel[2], out=m6);
+		And4Way (a=h, b=sel[0], c=sel[1], d=sel[2], out=m7);
+
+		Or (a=m0, b=m1, out=m0m1);
+		Or (a=m0m1, b=m2, out=m0m1m2);
+		Or (a=m0m1m2, b=m3, out=m0m1m2m3);
+		Or (a=m0m1m2m3, b=m4, out=m0m1m2m3m4);
+		Or (a=m0m1m2m3m4, b=m5, out=m0m1m2m3m4m5);
+		Or (a=m0m1m2m3m4m5, b=m6, out=m0m1m2m3m4m5m6);
+		Or (a=m0m1m2m3m4m5m6, b=m7, out=out);
+}
