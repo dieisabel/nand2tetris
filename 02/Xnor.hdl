@@ -1,0 +1,11 @@
+CHIP Xnor {
+	IN a, b;
+	OUT out;
+
+	PARTS:
+		Not (in=a, out=notA);
+		Not (in=b, out=notB);
+		And (a=a, b=b, out=aAndB);
+		And (a=notA, b=notB, out=notAAndNotB);
+		Or (a=aAndB, b=notAAndNotB, out=out);
+}

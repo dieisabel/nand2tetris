@@ -1,0 +1,38 @@
+CHIP EqualityComparator16 {
+	IN a[16], b[16];
+	OUT out;
+
+	PARTS:
+		Xnor (a=a[0], b=b[0], out=a0b0);
+		Xnor (a=a[1], b=b[1], out=a1b1);
+		Xnor (a=a[2], b=b[2], out=a2b2);
+		Xnor (a=a[3], b=b[3], out=a3b3);
+		Xnor (a=a[4], b=b[4], out=a4b4);
+		Xnor (a=a[5], b=b[5], out=a5b5);
+		Xnor (a=a[6], b=b[6], out=a6b6);
+		Xnor (a=a[7], b=b[7], out=a7b7);
+		Xnor (a=a[8], b=b[8], out=a8b8);
+		Xnor (a=a[9], b=b[9], out=a9b9);
+		Xnor (a=a[10], b=b[10], out=a10b10);
+		Xnor (a=a[11], b=b[11], out=a11b11);
+		Xnor (a=a[12], b=b[12], out=a12b12);
+		Xnor (a=a[13], b=b[13], out=a13b13);
+		Xnor (a=a[14], b=b[14], out=a14b14);
+		Xnor (a=a[15], b=b[15], out=a15b15);
+
+		And (a=a0b0, b=a1b1, out=And01);
+		And (a=And01, b=a2b2, out=And02);
+		And (a=And02, b=a3b3, out=And03);
+		And (a=And03, b=a4b4, out=And04);
+		And (a=And04, b=a5b5, out=And05);
+		And (a=And05, b=a6b6, out=And06);
+		And (a=And06, b=a7b7, out=And07);
+		And (a=And07, b=a8b8, out=And08);
+		And (a=And08, b=a9b9, out=And09);
+		And (a=And09, b=a10b10, out=And10);
+		And (a=And10, b=a11b11, out=And11);
+		And (a=And11, b=a12b12, out=And12);
+		And (a=And12, b=a13b13, out=And13);
+		And (a=And13, b=a14b14, out=And14);
+		And (a=And14, b=a15b15, out=out);
+}
